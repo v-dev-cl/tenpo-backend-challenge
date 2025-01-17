@@ -2,7 +2,7 @@
 Proyecto de prueba para aplicar a Tenpo como Backend Software Engineer.
 
 * Función para sumar 2 números con un porcentaje adicional obtenido desde un servicio externo.
-* Función para obtener todas las llamadas API realizadas a la suma y otros puntos finales.
+* Función para obtener todas las llamadas API realizadas a la suma y otros endpoints.
 * Límite de tasa establecido a 3 RPM (llamadas por minuto).
 * Utiliza Spring Reactive Repository para guardar y recuperar datos.
 * Documentación de Swagger (http://localhost:8080/v3/api-docs).
@@ -133,6 +133,7 @@ Status 200
 Principales sitios web usados:
 
 * [Baeldung spring tutorials](https://www.baeldung.com/)
+* [Baeldung Spring Reactive](https://www.baeldung.com/spring-reactive-series)
 * [Medium Pageable requests](https://medium.com/@davidpetro/spring-webflux-and-pageable-be55104c234f)
 * [Medium Rate Limit with redis](https://medium.com/@mbanaee61/efficient-rate-limiting-in-reactive-spring-boot-applications-with-redis-and-junit-testing-20675e73104a)
 
