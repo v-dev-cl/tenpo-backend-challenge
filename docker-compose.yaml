@@ -1,0 +1,60 @@
+version: '3.9'
+
+services:
+  app:
+    image: vampfern/tenpo-backend-challenge
+    build:
+      context: .
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_R2DBC_URL: r2dbc:postgresql://db:5432/postgres
+      SPRING_R2DBC_USERNAME: postgres
+      SPRING_R2DBC_PASSWORD: pass
+      SPRING_R2DBC_POOL_ENABLED: "true"
+      SPRING_REDIS_HOST: redis
+      SPRING_REDIS_PORT: 6379
+    depends_on:
+      - db
+      - redis
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: "2"
+          memory: "512M"
+        reservations:
+          cpus: "1"
+          memory: "256M"
+    networks:
+      - app_network
+
+  db:
+    image: postgres:15.5
+    container_name: db
+    environment:
+      POSTGRES_PASSWORD: pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app_network
+
+  redis:
+    image: redis:7.4.2
+    container_name: redis
+    ports:
+      - "6379:6379"
+    command: ["redis-server", "--appendonly", "no", "--save", ""]
+    networks:
+      - app_network
+
+volumes:
+  postgres_data:
+
+networks:
+  app_network:
+    driver: overlay
